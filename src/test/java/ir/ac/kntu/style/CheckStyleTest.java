@@ -12,10 +12,7 @@ import net.sourceforge.pmd.cpd.CPD;
 import net.sourceforge.pmd.cpd.CPDConfiguration;
 import net.sourceforge.pmd.cpd.LanguageFactory;
 import net.sourceforge.pmd.cpd.Match;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.xml.sax.InputSource;
 
 import java.io.*;
@@ -35,6 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 public class CheckStyleTest {
     private static final List<File> FILES = new ArrayList<>();
+    private static int score = 0;
 
     @BeforeAll
     public static void prepare() throws MalformedURLException {
@@ -45,11 +43,20 @@ public class CheckStyleTest {
         System.out.println("Found " + FILES.size() + " Java source files.");
     }
 
+    @AfterAll
+    public static void showScore() {
+        System.out.println(" ____________________");
+        System.out.println("|                    |");
+        System.out.printf("|    Score : %2d/40   |\n", score);
+        System.out.println("|____________________|");
+    }
+
     @Test
     @Tag("Blocks")
     @DisplayName("Checkstyle for Blocks")
     public void testCheckStyleBlocks() {
         testCheckStyle("blocks.xml");
+        score += 10;
     }
 
     @Test
@@ -57,6 +64,7 @@ public class CheckStyleTest {
     @DisplayName("Checkstyle for Naming Conventions")
     public void testCheckStyleNaming() {
         testCheckStyle("naming.xml");
+        score += 10;
     }
 
     @Test
@@ -64,6 +72,7 @@ public class CheckStyleTest {
     @DisplayName("Checkstyle for Imports")
     public void testCheckStyleImports() {
         testCheckStyle("imports.xml");
+        score += 10;
     }
 
     public void testCheckStyle(final String config) {
@@ -131,6 +140,7 @@ public class CheckStyleTest {
         copyPasteDetector.go();
         final Iterator<Match> matches = copyPasteDetector.getMatches();
         assertFalse(matches.hasNext(), "An Error Occurred!");
+        score += 10;
     }
 
     static void listFiles(final List<File> files, final File folder,
