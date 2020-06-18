@@ -1,7 +1,8 @@
 # P5 Counter-Strike 2D
 5th project
 
-![Check Style - CI](https://github.com/java-kntu-982/p5-ds2d-<Your Project>/workflows/Check%20Style%20-%20CI/badge.svg)
+![Check Style - CI](https://github.com/java-kntu-982/p5-cs2d<Your Project>/workflows/Check%20Style%20-%20CI/badge.svg)
+
 
 ## Details
 
